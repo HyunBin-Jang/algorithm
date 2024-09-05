@@ -2,30 +2,31 @@ from collections import deque
 
 n = int(input())
 pair_num = int(input())
-
-pair = []
-start = 0
+graph = [[]for _ in range(n+1)]
+start = 1
 visited = []
 
-for i in range(n):
-    p = list(map(int, input().split()))
-    if p[0]==1 or p[1]==1:
-        start = p
-    pair.append(p)
+for _ in range(pair_num):
+    t = list(map(int, input().split()))
+    graph[t[0]].append(t[1])
+    graph[t[1]].append(t[0])
+
 
 def bfs():
     queue = deque([])
     queue.append(start)
-
+    result = 0
+    visited.append(start)
     while queue:
-        t = queue.popleft()
-        if t[1] not in visited:
-            visited.append(t[1])
-            for _ in range(n):
-                p = list(map(int, input().split()))
-                if p[0] == 1 or p[1] == 1:
+        e = queue.popleft()
+        for i in graph[e]:
+            if i not in visited:
+                queue.append(i)
+                visited.append(i)
+                result += 1
+
+    return result
 
 
 
-
-
+print(bfs())
