@@ -7,7 +7,7 @@ for _ in range(M):
     v1, v2 = map(int, input().split())
     graph[v1].append(v2)
     graph[v2].append(v1)
-for i in range(M):
+for i in range(N+1):
     graph[i].sort()
 
 start = V
