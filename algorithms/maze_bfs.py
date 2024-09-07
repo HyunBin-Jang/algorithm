@@ -11,6 +11,7 @@ for _ in range(n):
 
 queue = deque([])
 queue.append(start)
+
 while queue :
     t = queue.popleft()
     print(t)
