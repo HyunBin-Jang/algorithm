@@ -1,14 +1,16 @@
 N = int(input())
 
 lec = []
-time = [0] * 1000
 
 for _ in range(N):
     l = list(map(int, input().split()))
-    for i in range(l[0], l[1]):
-        time[i] += 1
+    l.append(l[1] - l[0])
     lec.append(l)
-print(time)
 
-13
-23
+lec.sort(key = lambda x : x[2])
+lec.reverse()
+
+for i in range(N):
+    for j in range(i+1, N):
+        if lec[i][0] <= lec[j][0] and lec[i][1] >= lec[j][1]:
+            
