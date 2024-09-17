@@ -1,4 +1,5 @@
 import heapq
+
 N, D = map(int, input().split())
 
 shortcut = []
@@ -18,3 +19,5 @@ for i in range(len(shortcut)):
     for j in range(i + 1, len(shortcut)):
         if shortcut[i][1] < shortcut[j][0]:
             graph.append([shortcut[i][1], shortcut[j][0], shortcut[j][0] - shortcut[i][1]])
+
+def dijkstra(start):
