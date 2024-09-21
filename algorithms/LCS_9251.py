@@ -1,22 +1,14 @@
 str1 = input()
 str2 = input()
 
-firsted = []
+d = [[0 for _ in range(len(str1) + 1)] for _ in range(len(str2)+ 1)]
 result = 0
 
-for l in range(len(str1)):
-    if str1[l] in firsted:
-        continue
-    else:
-        firsted.append(str1[l])
-    lcs = ''
-    k = 0
-    for i in range(l, len(str1)):
-        for j in range(k, len(str2)):
-            if str1[i] == str2[j]:
-                lcs += str1[i]
-                k = j + 1
-    print(lcs)
-    result = max(result, len(lcs))
+for i in range(1, len(str1) + 1):
+    for j in range(1, len(str2) + 1):
+        if str1[i - 1] == str2[j - 1]:
+            d[j][i] = d[j-1][i-1] + 1
+        else:
+            d[j][i] = max(d[j][i-1], d[j-1][i])
 
-print(result)
+print(d[len(str2)][len(str1)])
