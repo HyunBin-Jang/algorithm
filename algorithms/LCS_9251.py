@@ -12,3 +12,27 @@ for i in range(1, len(str1) + 1):
             d[j][i] = max(d[j][i-1], d[j-1][i])
 
 print(d[len(str2)][len(str1)])
+
+
+# 다른 풀이
+# from sys import stdin
+# 
+# 
+# def main():
+#     str_1 = stdin.readline().strip()
+#     str_2 = stdin.readline().strip()
+# 
+#     dp = [0] * 1000
+#     for char_1 in str_1:
+#         max_count = 0
+#         for j, char_2 in enumerate(str_2):
+#             if max_count < dp[j]:
+#                 max_count = dp[j]
+#                 continue
+#             if char_1 == char_2:
+#                 dp[j] = max_count + 1
+#     print(max(dp))
+# 
+# 
+# if __name__ == "__main__":
+#     main()
