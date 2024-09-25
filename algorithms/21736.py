@@ -11,19 +11,18 @@ for i in range(N):
             start.append(j)
             start.append(i)
 
-visited = []
+visited = [[0] * M for _ in range(N)]
 
 def dfs(x, y):
     result = 0
-
-    if [x, y] in visited:
+    if x < 0 or x >= M or y < 0 or y >= N or graph[y][x] == 'X':
         return 0
-    elif x < 0 or x >= M or y < 0 or y >= N or graph[y][x] == 'X':
+    elif visited[y][x] == 1:
         return 0
     elif graph[y][x] == 'P':
         result += 1
 
-    visited.append([x, y])
+    visited[y][x] = 1
     result += dfs(x - 1, y)
     result += dfs(x + 1, y)
     result += dfs(x, y - 1)
