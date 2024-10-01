@@ -27,6 +27,4 @@ def bfs():
 
     return result
 
-
-
 print(bfs())
