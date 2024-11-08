@@ -26,6 +26,6 @@ while True:
     visited = [[False] * N for _ in range(N)]
     for _ in range(N):
         graph.append(list(map(int, input().split())))
-    bfs(result, graph, visited)
+    dijkstra(result, graph, visited)
     print("Problem", str(T) + ":", result[N-1][N-1])
     T += 1
