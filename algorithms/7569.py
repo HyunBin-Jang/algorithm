@@ -1,45 +1,52 @@
 from collections import deque
 M, N, H = map(int, input().split())
 graph = []
-for _ in range(H):
-    g = []
-    for _ in range(N):
-        g.append(list(map(int, input().split())))
-    graph.append(g)
-start_x = -1
-start_y = -1
-start_z = -1
+riped = 0
+empty = 0
+first_riped = []
 dx = [1, -1, 0, 0, 0, 0]
 dy = [0, 0, 1, -1, 0, 0]
 dz = [0, 0, 0, 0, 1, -1]
-result = []
-def bfs():
-    q = deque([])
-    q.append([start_z, start_y, start_x, 0])
-    mx = 0
-    while q:
-        t = q.popleft()
-        for i in range(6):
-            z2 = t[0] + dz[i]
-            y2 = t[1] + dy[i]
-            x2 = t[2] + dx[i]
-            if 0 <= z2 < H and 0 <= y2 < N and 0 <= x2 < M and graph[z2][y2][x2] == 0:
-                graph[z2][y2][x2] = 1
-                q.append([z2, y2, x2, t[3] + 1])
-                mx = max(mx, t[3] + 1)
-    result.append(mx)
 
-while True:
-    find_0 = False
-    for i in range(H):
-        for j in range(N):
-            for k in range(M):
-                if graph[i][j][k] == 0:
-                    start_z = i
-                    start_y = j
-                    start_x = i
-                    bfs()
-                    find_0 = True
-    if not find_0:
-        break
-print(result)
+for i in range(H):
+    tmp1 = []
+    for j in range(N):
+        tmp2 = list(map(int, input().split()))
+        for k in range(M):
+            if tmp2[k] == 1:
+                riped += 1
+                first_riped.append([i,j,k])
+            elif tmp2[k] == -1:
+                empty += 1
+        tmp1.append(tmp2)
+    graph.append(tmp1)
+
+goal_riped = M * N * H - empty
+queue = deque([])
+result = 0
+
+for f in first_riped:
+    queue.append([f[0],f[1],f[2],0])
+
+while queue:
+    t = queue.popleft()
+    for i in range(6):
+        new_z = t[0] + dz[i]
+        new_y = t[1] + dy[i]
+        new_x = t[2] + dx[i]
+        day = t[3] + 1
+        if (0 <= new_z < H and 0 <= new_x < M
+                and 0 <= new_y < N and graph[new_z][new_y][new_x] == 0):
+            graph[new_z][new_y][new_x] = 1
+            riped += 1
+            queue.append([new_z, new_y, new_x, day])
+            if riped == goal_riped:
+                result = day
+                break
+
+if len(first_riped) == goal_riped:
+    print(0)
+elif riped == goal_riped:
+    print(result)
+else:
+    print(-1)
