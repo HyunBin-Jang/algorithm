@@ -1,4 +1,4 @@
-# 💻 Spring MVC Study Repository
+# 💻 Algorithm
 Boj 알고리즘 문제 해결을 진행하며 풀이를 저장하는 공간입니다.
 
 ---
